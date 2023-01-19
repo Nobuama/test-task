@@ -1,18 +1,27 @@
 import React from 'react';
 import {TextField, IconButton} from '@mui/material';
-import { Articles, ArticleState } from './Articles';
+import { ArticleState } from './Articles';
 
 interface SearchProps {
+  search: ArticleState[] | undefined,
   articles: ArticleState[] | undefined,
-  setArticles: React.Dispatch<React.SetStateAction<ArticleState[]>>,
+  setSearch: React.Dispatch<React.SetStateAction<ArticleState[]>>,
 }
-export const Search: React.FC<SearchProps> = ({articles, setArticles}) => {
+export const Search: React.FC<SearchProps> = ({search, setSearch, articles}) => {
 
-  const onChange = (e: Event & {target: HTMLInputElement}) => {
-    if (articles) {
-      setArticles(articles.filter(el => el.title == e.target.value));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (search && articles) {
+      if(e.target.value.length === 0){setSearch(articles)}
+      
+      const searchByTitle = articles.filter(el => el.title.toLowerCase().includes(e.target.value.toLowerCase()));
+      const searchByContent = articles.filter(el => 
+        el.summary.toLowerCase()
+        .includes(e.target.value.toLowerCase()));
+      const unique = new Set(searchByTitle.concat(searchByContent));
+      const result = Array.from(unique);
+      setSearch(result);
     }
-  }
+  };
 
   return(
     <form>
@@ -21,12 +30,10 @@ export const Search: React.FC<SearchProps> = ({articles, setArticles}) => {
       className='searchbar'
       size='small'
       variant="outlined"
-      onChange={() => onChange}
+      onChange={handleChange}
       >
       </TextField>
-      <IconButton type="submit" aria-label="search">
-        {/* <SearchIcon style={{ fill: "blue" }} /> */}
-      </IconButton>
+      <IconButton type="submit" aria-label="search"/>
     </form>
   )
 };
