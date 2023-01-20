@@ -1,12 +1,14 @@
 import { Container, Paper, Typography } from "@mui/material";
 import React from "react";
+import { useParams } from "react-router-dom";
 
 interface PageProps{
-  img: string,
-  title: string, 
+  img?: string,
+  title?: string, 
 }
 
 export const Page: React.FC<PageProps> = ({img, title}) => {
+  const {img, title} = useParams()
 
   return(
     <Container>
