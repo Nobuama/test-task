@@ -1,4 +1,122 @@
-.card__btn{
-    color: black;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+*{
+    font-family: 'Montserrat', sans-serif !important;
+    color: #363636;
+}
+html {
+    margin: 0;
+    padding: 0;
+    // background-color: #363636;
+}
+p {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 24px !important;
+}
+.wrapper {
+    max-width: 1440px;
+    padding: 40px 75px 60px;
+    margin: 0 auto;
+}
+.MuiPaper-root {
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.05) !important;
+}
+
+
+.card {
+    width: 400px;
+    height: 530px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .card_img{
+        width: 400px;
+        height: 217px;
+        object-fit: cover;
+        border-top-left-radius:5px;
+        border-top-right-radius: 5px;
+    }
+    .card_text {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-width: 100%;
+        padding: 25px;
+        gap: 20px;
+    }
+}
+
+.date {
+    opacity: 0.6;
+    img {
+        margin-right: 9px;
+    }
+}
+
+.bold_text {
+    font-size: 16px;
     font-weight: 700;
+    img{
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+}
+.page_wrapper {
+    padding: 0 75px 60px;
+    margin: 0 auto;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    a {
+        margin-left: 152px;
+    }
+}
+.img_block {
+    height: 235px;
+    overflow: hidden;
+    
+    img {
+        width: 1440px;
+        height: 235px;
+        object-fit: cover;
+    }
+}
+.page_text {
+    margin: 150px 75px;
+    padding: 35px 75px 50px;
+    max-width: 1140px;
+    position: absolute;
+
+    p {
+        font-size: 18px;
+        margin-bottom: 24px;
+    } :last-child{
+        margin: 0;
+    }
+    h2 {
+        margin-bottom: 50px;
+    }
+}
+.search_wrapper{
+    border-bottom: 1px solid #EAEAEA;
+    margin-bottom: 45px;
+}
+.search_bar{
+    max-width: 600px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 40px;
+    img{
+        margin-right: 20px;
+    }
 }

@@ -1,21 +1,34 @@
 import { Container, Paper, Typography } from "@mui/material";
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { arrowBack } from "../assets/logo/indext";
+import { ArticleState } from "../App";
 
-interface PageProps{
-  img?: string,
-  title?: string, 
-}
+export const Page: React.FC = () => {
+  const {id} = useParams();
+  const [post, setPost] = useState<ArticleState>();
 
-export const Page: React.FC<PageProps> = ({img, title}) => {
-  const {img, title} = useParams()
-
+  const pageText: HTMLDivElement | null = document.querySelector('.page_text');
+  const pageHeight = pageText ? (pageText.offsetHeight + 210) : 1255;
+  
+  useEffect(() => {
+    fetch(`https://api.spaceflightnewsapi.net/v3/articles/${id}`)
+      .then(res => {
+        if (!res.ok) {
+          return Error("Oh no");
+        }
+        return res.json();
+      })
+      .then((data => setPost(data)))
+		}, [id]);
+  
   return(
-    <Container>
-      <img src={img} alt="" />
-      <Paper>
-        <Typography>{title}</Typography>
-        <Container>
+    <div className="page_wrapper" style={{height: pageHeight}}>
+      <div className="img_block">
+        <img src={post?.imageUrl} alt="" />
+      </div>
+      <Paper className="page_text">
+          <Typography component='h2' sx={{'textAlign': 'center'}}>{post?.title}</Typography>
           <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum ornare convallis non etiam tincidunt tincidunt. Non dolor vel purus id. Blandit habitasse volutpat id dolor pretium, sem iaculis. Faucibus commodo mauris enim, turpis blandit.
           Porttitor facilisi viverra mi lacus lacinia accumsan. Pellentesque gravida ligula bibendum aliquet nulla massa elit. Ac faucibus donec sit morbi pharetra urna. Vel facilisis amet placerat ultrices lobortis proin nulla. Molestie tellus sed pellentesque tortor vitae eu cras nisl. Sem facilisi amet vitae ultrices nullam tellus. Pellentesque eget iaculis morbi at quis eget lacus, aliquam etiam. Neque ipsum, placerat vel convallis nulla orci, nunc etiam. Elementum risus facilisi mauris diam amet et sed.
           </Typography>
@@ -28,9 +41,11 @@ export const Page: React.FC<PageProps> = ({img, title}) => {
           <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum ornare convallis non etiam tincidunt tincidunt. Non dolor vel purus id. Blandit habitasse volutpat id dolor pretium, sem iaculis. Faucibus commodo mauris enim, turpis blandit.
           Porttitor facilisi viverra mi lacus lacinia accumsan. Pellentesque gravida ligula bibendum aliquet nulla massa elit. Ac faucibus donec sit morbi pharetra urna. Vel facilisis amet placerat ultrices lobortis proin nulla. 
           </Typography>
-        </Container>
       </Paper>
-
-    </Container>
+      <Link className="bold_text" to={'/'}>
+        <img src={arrowBack} alt="" />
+        Back to homepage
+      </Link>
+    </div>
   )
 };

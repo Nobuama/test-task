@@ -1,6 +1,8 @@
 import React from 'react';
-import {TextField, IconButton} from '@mui/material';
-import { ArticleState } from './Articles';
+import {TextField, Typography, IconButton, Input, Paper} from '@mui/material';
+import { ArticleState } from '../App';
+import { SearchOutlined } from '@mui/icons-material';
+import { searchIcon } from '../assets/logo/indext';
 
 interface SearchProps {
   search: ArticleState[] | undefined,
@@ -24,16 +26,18 @@ export const Search: React.FC<SearchProps> = ({search, setSearch, articles}) => 
   };
 
   return(
-    <form>
-      <TextField 
-      placeholder='Search...'
-      className='searchbar'
-      size='small'
-      variant="outlined"
-      onChange={handleChange}
-      >
-      </TextField>
-      <IconButton type="submit" aria-label="search"/>
-    </form>
+    <div className='search_wrapper'>
+      <p className='bold_text'>Filter by keywords</p>
+      <Paper className='search_bar'>
+        <img src={searchIcon} alt="" />
+        <Input 
+        placeholder='Search...'
+        className='searchbar'
+        onChange={handleChange}
+        disableUnderline
+        />
+      </Paper>
+      <p className='bold_text'>Results: {search?.length}</p>
+    </div>
   )
 };
