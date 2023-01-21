@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './assets/styles/index.css';
 import { Articles } from './components/Articles';
 import {Routes, Route, } from 'react-router-dom';

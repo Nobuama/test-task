@@ -1,7 +1,6 @@
 import React from 'react';
-import {TextField, Typography, IconButton, Input, Paper} from '@mui/material';
+import {Input, Paper} from '@mui/material';
 import { ArticleState } from '../App';
-import { SearchOutlined } from '@mui/icons-material';
 import { searchIcon } from '../assets/logo/indext';
 
 interface SearchProps {
@@ -13,14 +12,30 @@ export const Search: React.FC<SearchProps> = ({search, setSearch, articles}) => 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (search && articles) {
+      let str = e.target.value.toLowerCase();
+
       if(e.target.value.length === 0){setSearch(articles)}
       
-      const searchByTitle = articles.filter(el => el.title.toLowerCase().includes(e.target.value.toLowerCase()));
-      const searchByContent = articles.filter(el => 
-        el.summary.toLowerCase()
-        .includes(e.target.value.toLowerCase()));
+      const searchByTitle = articles.filter(el => el.title.toLowerCase().includes(str));
+      const searchByContent = articles.filter(el => el.summary.toLowerCase().includes(str));
       const unique = new Set(searchByTitle.concat(searchByContent));
-      const result = Array.from(unique);
+      const arr = Array.from(unique);
+      const result = arr.map(item => {
+        let newTitle = item.title.replace(
+          new RegExp(str, 'gi'),
+          match => `<mark>${match}</mark>`
+        )
+        let newSum = item.summary.replace(
+          new RegExp(str, 'gi'),
+          match => `<mark>${match}</mark>`
+        )
+        return {
+          ...item,
+          title: newTitle,
+          summary: newSum,
+        }
+      })
+      
       setSearch(result);
     }
   };
