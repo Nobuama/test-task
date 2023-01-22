@@ -25,13 +25,13 @@ export const Articles: React.FC<ArticlesProps> = ({articles}) => {
 
     switch (result[1]) {
       case "01":
-        result[1] = result[1].slice(1) + 'st';
+        result[1] = result[1].slice(1) + 'st,';
         break;
       case "02":
-        result[1] = result[1].slice(1) + 'nd';
+        result[1] = result[1].slice(1) + 'nd,';
         break;
       case "03":
-        result[1] = result[1].slice(1) + 'rd';
+        result[1] = result[1].slice(1) + 'rd,';
         break;
       default:
         result[1] += 'th,'
