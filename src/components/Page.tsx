@@ -7,9 +7,15 @@ import { ArticleState } from "../App";
 export const Page: React.FC = () => {
   const {id} = useParams();
   const [post, setPost] = useState<ArticleState>();
-
+  const [pageHeight, setPageHeight] = useState(1255);
   const pageText: HTMLDivElement | null = document.querySelector('.page_text');
-  const pageHeight = pageText ? (pageText.offsetHeight + 270) : 1255;
+  // const pageHeight = pageText ? (pageText.offsetHeight + 300) : 1255;
+
+  useEffect(() => {
+    if(pageText) {
+      setPageHeight(pageText.offsetHeight + 270)
+    }
+  }, [pageText])
   
   useEffect(() => {
     fetch(`https://api.spaceflightnewsapi.net/v3/articles/${id}`)
