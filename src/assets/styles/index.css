@@ -126,5 +126,8 @@ h2 {
 .search_bar img {
   margin-right: 20px;
 }
+.search_bar input {
+  width: 520px;
+}
 
 /*# sourceMappingURL=index.css.map */

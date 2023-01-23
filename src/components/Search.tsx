@@ -45,9 +45,8 @@ export const Search: React.FC<SearchProps> = ({search, setSearch, articles}) => 
       <p className='bold_text'>Filter by keywords</p>
       <Paper className='search_bar'>
         <img src={searchIcon} alt="" />
-        <Input 
+        <Input
         placeholder='Search...'
-        className='searchbar'
         onChange={handleChange}
         disableUnderline
         />
